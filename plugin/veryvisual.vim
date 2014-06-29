@@ -21,8 +21,9 @@ if x11_is_running && is_text_vim
 	end
 
 	" call gvim instead of vim, using the original options plus ours
-	call system('gvim ' . shellescape(@%) . ' ' . opts)
+	let args = join(map(range(0, argc()-1), 'shellescape(argv(v:val))'), ' ')
+	call system('gvim ' . args . ' ' . opts)
 
 	" let this instance die
-	quit
+	qall
 endif
